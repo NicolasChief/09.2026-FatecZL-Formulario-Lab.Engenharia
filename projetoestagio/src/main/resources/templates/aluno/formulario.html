@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de alunos</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+    <main class="container">
+        <header class="header">
+            <h1>Cadastro de alunos</h1>
+        </header>
+
+        <p class="aviso aviso-ok" th:if="${mensagem}" th:text="${mensagem}"></p>
+        <p class="aviso aviso-erro" th:if="${erro}" th:text="${erro}"></p>
+
+        <form class="formulario" method="post" th:action="@{/aluno}">
+
+            <div class="campo">
+                <label for="nome">Nome completo: <span>*</span></label>
+                <input type="text" id="nome" name="nome" th:value="${dados?.nome()}" required>
+            </div>
+
+            <div class="campo">
+                <label for="ra">RA: <span>*</span></label>
+                <input type="text" id="ra" name="ra" inputmode="numeric" th:value="${dados?.ra()}" required>
+            </div>
+
+            <div class="campo">
+                <label for="genero">Gênero: <span>*</span></label>
+                <select id="genero" name="genero" required>
+                    <option value="" selected disabled></option>
+                    <option value="feminino" th:selected="${dados?.genero() == 'feminino'}">Feminino</option>
+                    <option value="masculino" th:selected="${dados?.genero() == 'masculino'}">Masculino</option>
+                    <option value="nao-informar" th:selected="${dados?.genero() == 'nao-informar'}">Prefiro não informar</option>
+                </select>
+            </div>
+
+            <div class="campo">
+                <label for="curso">Curso: <span>*</span></label>
+                <select id="curso" name="curso" required>
+                    <option value="" selected disabled></option>
+                    <option value="ANALISE_E_DESENVOLVIMENTO_DE_SISTEMAS" th:selected="${dados?.curso()?.name() == 'ANALISE_E_DESENVOLVIMENTO_DE_SISTEMAS'}">Análise e Desenvolvimento de Sistemas</option>
+                    <option value="COMERCIO_EXTERIOR" th:selected="${dados?.curso()?.name() == 'COMERCIO_EXTERIOR'}">Comércio Exterior</option>
+                    <option value="DESENVOLVIMENTO_DE_PRODUTOS_PLASTICOS" th:selected="${dados?.curso()?.name() == 'DESENVOLVIMENTO_DE_PRODUTOS_PLASTICOS'}">Desenvolvimento de Produtos Plásticos</option>
+                    <option value="DESENVOLVIMENTO_DE_SOFTWARE_MULTIPLATAFORMA" th:selected="${dados?.curso()?.name() == 'DESENVOLVIMENTO_DE_SOFTWARE_MULTIPLATAFORMA'}">Desenvolvimento de Software Multiplataforma</option>
+                    <option value="GESTAO_DE_RECURSOS_HUMANOS" th:selected="${dados?.curso()?.name() == 'GESTAO_DE_RECURSOS_HUMANOS'}">Gestão de Recursos Humanos</option>
+                    <option value="GESTAO_EMPRESARIAL" th:selected="${dados?.curso()?.name() == 'GESTAO_EMPRESARIAL'}">Gestão Empresarial</option>
+                    <option value="LOGISTICA" th:selected="${dados?.curso()?.name() == 'LOGISTICA'}">Logística</option>
+                    <option value="POLIMEROS" th:selected="${dados?.curso()?.name() == 'POLIMEROS'}">Polímeros</option>
+                </select>
+            </div>
+
+            <div class="campo">
+                <label for="nascimento">Data de nascimento: <span>*</span></label>
+                <input type="text" id="nascimento" name="nascimento" placeholder="dd/mm/yyyy" th:value="${dados?.nascimento() != null} ? ${#temporals.format(dados.nascimento(), 'dd/MM/yyyy')} : ''" required>
+            </div>
+
+            <div class="campo">
+                <label for="periodo">Período: <span>*</span></label>
+                <select id="periodo" name="periodo" required>
+                    <option value="" selected disabled></option>
+                    <option value="MATUTINO" th:selected="${dados?.periodo()?.name() == 'MATUTINO'}">Manhã</option>
+                    <option value="VESPERTINO" th:selected="${dados?.periodo()?.name() == 'VESPERTINO'}">Tarde</option>
+                    <option value="NOTURNO" th:selected="${dados?.periodo()?.name() == 'NOTURNO'}">Noite</option>
+                </select>
+            </div>
+
+            <div class="campo">
+                <label for="etnia">Etnia: <span>*</span></label>
+                <select id="etnia" name="etnia" required>
+                    <option value="" selected disabled></option>
+                    <option value="branca" th:selected="${dados?.etnia() == 'branca'}">Branca</option>
+                    <option value="preta" th:selected="${dados?.etnia() == 'preta'}">Preta</option>
+                    <option value="parda" th:selected="${dados?.etnia() == 'parda'}">Parda</option>
+                    <option value="amarela" th:selected="${dados?.etnia() == 'amarela'}">Amarela</option>
+                    <option value="indigena" th:selected="${dados?.etnia() == 'indigena'}">Indígena</option>
+                    <option value="nao-informar" th:selected="${dados?.etnia() == 'nao-informar'}">Prefiro não informar</option>
+                </select>
+            </div>
+
+            <div class="campo">
+                <label for="semestre">Semestre: <span>*</span></label>
+                <select id="semestre" name="semestre" required>
+                    <option value="" selected disabled></option>
+                    <option value="1" th:selected="${dados?.semestre() == 1}">1º semestre</option>
+                    <option value="2" th:selected="${dados?.semestre() == 2}">2º semestre</option>
+                    <option value="3" th:selected="${dados?.semestre() == 3}">3º semestre</option>
+                    <option value="4" th:selected="${dados?.semestre() == 4}">4º semestre</option>
+                    <option value="5" th:selected="${dados?.semestre() == 5}">5º semestre</option>
+                    <option value="6" th:selected="${dados?.semestre() == 6}">6º semestre</option>
+                    <option value="7" th:selected="${dados?.semestre() == 7}">7º semestre</option>
+                    <option value="8" th:selected="${dados?.semestre() == 8}">8º semestre</option>
+                    <option value="9" th:selected="${dados?.semestre() == 9}">9º semestre</option>
+                    <option value="10" th:selected="${dados?.semestre() == 10}">10º semestre</option>
+                </select>
+            </div>
+
+            <div class="campo">
+                <label for="escolaridade">Nível de escolaridade: <span>*</span></label>
+                <select id="escolaridade" name="escolaridade" required>
+                    <option value="" selected disabled></option>
+                    <option value="medio" th:selected="${dados?.escolaridade() == 'medio'}">Ensino médio</option>
+                    <option value="tecnico" th:selected="${dados?.escolaridade() == 'tecnico'}">Ensino técnico</option>
+                    <option value="superior" th:selected="${dados?.escolaridade() == 'superior'}">Ensino superior</option>
+                    <option value="pos" th:selected="${dados?.escolaridade() == 'pos'}">Pós-graduação</option>
+                </select>
+            </div>
+
+            <div class="campo">
+                <label for="como-soube">Como ficou sabendo do curso? <span>*</span></label>
+                <select id="como-soube" name="comoSoube" required>
+                    <option value="" selected disabled></option>
+                    <option value="internet" th:selected="${dados?.comoSoube() == 'internet'}">Internet</option>
+                    <option value="redes" th:selected="${dados?.comoSoube() == 'redes'}">Redes sociais</option>
+                    <option value="amigos" th:selected="${dados?.comoSoube() == 'amigos'}">Amigos/familiares</option>
+                    <option value="escola" th:selected="${dados?.comoSoube() == 'escola'}">Escola</option>
+                    <option value="outros" th:selected="${dados?.comoSoube() == 'outros'}">Outros</option>
+                </select>
+            </div>
+
+            <div class="campo">
+                <label for="renda">Renda familiar: <span>*</span></label>
+                <select id="renda" name="renda" required>
+                    <option value="" selected disabled></option>
+                    <option value="ate-1" th:selected="${dados?.renda() == 'ate-1'}">Até 1 salário mínimo</option>
+                    <option value="1-3" th:selected="${dados?.renda() == '1-3'}">De 1 a 3 salários mínimos</option>
+                    <option value="3-5" th:selected="${dados?.renda() == '3-5'}">De 3 a 5 salários mínimos</option>
+                    <option value="5-10" th:selected="${dados?.renda() == '5-10'}">De 5 a 10 salários mínimos</option>
+                    <option value="mais-10" th:selected="${dados?.renda() == 'mais-10'}">Mais de 10 salários mínimos</option>
+                </select>
+            </div>
+
+            <div class="campo campo-textarea">
+                <label for="outros">Caso tenha selecionado "outros", como foi?</label>
+                <textarea id="outros" name="outros" th:text="${dados?.outros()}"></textarea>
+            </div>
+
+            <div class="campo">
+                <label for="cep">Localidade (CEP): <span>*</span></label>
+                <input type="text" id="cep" name="cep" inputmode="numeric" maxlength="9" autocomplete="postal-code" th:value="${dados?.cep()}" required>
+                <small id="cidade-cep" class="cidade"></small>
+            </div>
+
+            <div class="campo">
+                <label for="deficiencia">Possui alguma deficiência? Se sim, qual?</label>
+                <input type="text" id="deficiencia" name="deficiencia" th:value="${dados?.deficiencia()}">
+            </div>
+
+            <div class="acoes">
+                <button type="submit" class="btn salvar">💾 Salvar dados</button>
+                <button type="reset" class="btn limpar">📝 Limpar dados</button>
+            </div>
+
+        </form>
+    </main>
+
+    <script th:src="@{/js/cep.js}"></script>
+</body>
+</html>

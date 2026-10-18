@@ -21,13 +21,16 @@ public class Aluno {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
+    private String email;
     private String genero;
     private LocalDate dataNascimento;
     private String etnia;
     private String nivelEscolaridade;
     private String rendaFamiliar;
     private String localidadeCEP;
-    private String deficiencia;
+    private String cidade;
+    private String estado; // sigla (UF), ex.: SP
+    private String deficiencia; // "sim" ou "nao"
     @Column(unique = true, nullable = false)
     private String ra; // String: não perde zero à esquerda e não estoura Long
     @Enumerated(EnumType.STRING)
@@ -40,12 +43,15 @@ public class Aluno {
 
     public Aluno(DadosCadastroAluno d) {
         this.nome = d.nome();
+        this.email = d.email();
         this.genero = d.genero();
         this.dataNascimento = d.nascimento();
         this.etnia = d.etnia();
         this.nivelEscolaridade = d.escolaridade();
         this.rendaFamiliar = d.renda();
         this.localidadeCEP = d.cep();
+        this.cidade = d.cidade();
+        this.estado = d.estado();
         this.deficiencia = d.deficiencia();
         this.ra = d.ra();
         this.curso = d.curso();

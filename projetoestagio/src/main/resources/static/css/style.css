@@ -111,30 +111,13 @@ body {
     opacity: 1;
 }
 
-/* Posicionamento exato dos últimos campos para reproduzir a imagem */
-.formulario > .campo:nth-child(11) {
-    grid-column: 1;
-    grid-row: 6;
-}
-
-.formulario > .campo:nth-child(12) {
-    grid-column: 2;
-    grid-row: 6 / span 2;
-}
-
-.formulario > .campo:nth-child(13) {
-    grid-column: 1;
-    grid-row: 7;
-}
-
-.formulario > .campo:nth-child(14) {
-    grid-column: 1;
-    grid-row: 8;
-}
+/* ---- posicionamento ----
+   Antes cada campo era colocado "na mão" (nth-child). Com os campos novos isso
+   desalinhava tudo, então agora o grid distribui sozinho, dois campos por linha
+   (o textarea "outros" fica ao lado de "Como ficou sabendo") e os botões na coluna da direita. */
 
 .formulario > .acoes {
     grid-column: 2;
-    grid-row: 8;
 }
 
 .acoes {
@@ -216,10 +199,74 @@ body {
     color: #9b0000;
 }
 
-.campo .cidade {
+/* textinho de apoio embaixo do campo (CEP e períodos disponíveis) */
+.campo .cidade,
+.campo .dica {
     display: block;
     margin-top: 6px;
     font-size: 14px;
     color: #555;
 }
 
+/* ---- grupos de radio (gênero, período, escolaridade, como soube, renda, deficiência) ---- */
+fieldset.campo {
+    border: 0;
+}
+
+/* a legenda faz o papel do "label" e usa o mesmo visual dele */
+.campo legend {
+    font-size: 17px;
+    line-height: 21px;
+    margin-bottom: 7px;
+}
+
+.campo legend span {
+    color: #f00000;
+}
+
+.opcoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+}
+
+.campo .opcoes label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* desfaz o estilo de caixa de texto (largura 100%, altura 37px, borda) que os radios herdariam de ".campo input" */
+.campo .opcoes input[type="radio"] {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    padding: 0;
+    border: 0;
+    accent-color: #df0000;
+    cursor: pointer;
+}
+
+/* ".campo input" tira o outline; aqui devolvemos para quem navega pelo teclado */
+.campo .opcoes input[type="radio"]:focus-visible {
+    outline: 2px solid #999;
+    outline-offset: 2px;
+}
+
+/* período que o curso escolhido não oferece fica escondido (o JS põe o atributo hidden) */
+.campo .opcoes label[hidden] {
+    display: none;
+}
+
+/* sem texto, a dica não ocupa espaço */
+.campo .dica:empty {
+    display: none;
+}
+
+/* cidade e estado preenchidos pelo CEP */
+.campo input[readonly] {
+    background: #f1f1f1;
+}
